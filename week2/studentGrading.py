@@ -31,27 +31,33 @@ def grade(x):
         return "D"
 
 
-def meanGrade(scores,NofSubjects):
-    return scores/NofSubjects
+def meanScore(scores,NofSubjects):
+    return totalMarks/NofSubjects
     
-def schoolGrade(scores, NofStudents):
-    return scores/NofStudents
+def schoolScore(scores, NofStudents):
+    return totalMarks/NofStudents
 
 
-#***********************RESULT COPY*************************
+#print("*"*15,"RESULT COPY", "*"*15)
 
-#print(student.items())
 
 for k,v in students.items():
     print("Name:",v['Name'])
     print("Reg No.:",v['RegNo'])
     print("Class:",v['Class'])
-    for subject,scores in v['scores'].items():
-        scores += score
-        print(subject,score,"Grade:",grade(scores))
-    print('MEAN SCORE:',meanGrade(scores,len(v['Nofsubjectsscores'])))
-    print('SCHOOL GRADE:',schoolGrade(scores,len(v['Nofstudents'])))
+    totalMarks=0
 
-#************************* The END******************************
+    for subject,scores in v['scores'].items():
+        totalMarks += score
+        print(subject,score,grade(scores))
+    print('MEAN SCORE:',meanScore(totalMarks,len(v['scores'])))
+
+        print('MEAN GRADE:',grade(totalMarks,len(v['scores'])))
+
+        print('SCHOOL GRADE:',schoolScore(totalMarks,len(v['scores'])))
+
+        #print()
+
+#print("*"*15,"THE END", "*"*15)
 
 #print("School Grade {}".format(schoolGrade))

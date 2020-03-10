@@ -21,17 +21,3 @@ meanGrade=(a+b+c)/3
 print('{} reg {} scored {} {} in math,{} {} in eng, & {} {} in kisw, overall grade is {}'.format(name,reg,math,grade(math),eng,grade(eng),kisw,grade(kisw),meanGrade,grade(meanGrade)))
 
 
-subjects=dict()
-
-NofSubjects=int(input('Enter no of subjects'))
-for n in range(1, NofSubjects+1):
-    subjectName=input("enter name of subject")
-    score=int(input("enter score of subject"))
-    subjects[subjectName]=score
-
-print(subjects)
-
-for k,v in subjects.items():
-    print(k, getGrade(v))
-    sum +=v
-    print("meanGrade is", getmean(sum))
