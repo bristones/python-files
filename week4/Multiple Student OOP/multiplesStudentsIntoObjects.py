@@ -1,38 +1,36 @@
 # multiple students
 from classStudent_mod import Student 
 from subjects_mod import Subjects 
-from student_mod import Students 
 from gradingsystem import getGrade
 from gradingsystem import getMeanScore
 
 noOfStudents = int(input('Enter the no of students'))
 
-student=[]
+
 # input details for many students
 for n in range(1,noOfStudents+1):
+    student=[]
     studentName = input('Enter Name of Student \n')
     regNo = input('Enter Reg Number \n')
     studentClass = input('Enter Class \n')
 
     schoolName = input('Enter Name of Skul \n')
-    schoolAddress = input('Enter Address of Skul \n')
+    schoolAddress = input('Enter Address of Skul \n'
     school=School(schoolName,schoolAddress)
 
     nofsubjects= int(input('Enter no. of subjects \n'))
    
-    Subjects=[]
+    
     for s in range(1,nofsubjects+1):
+        subjects=[]
         subjectName=input('enter name of subject \n'.strip())
-        subjectScore=int(input('enter the score \n')#{} \n'.format(subjectScore)))
-        
+        subjectScore=int(input('enter the score \n')
         #create an instance of the subject 
-        subjecto=subjects(subjectName,subjectScore)
-        Subjects.append(subjecto)
+        subject = Subject(subjectName,subjectScore)
+        subjects.append(subject)
 
     #create an instance of a student
-    student=students(studentName,regNo,schoolName,subject)
-    #print(student.name)
-    #print(student.schoolName)
+    student = Student(studentName,regNo,schoolName,subject)
     students.append(student)
 
 for stude in student1:
