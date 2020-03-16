@@ -1,13 +1,14 @@
 #starting mysql terminal
-sudo mysql -u root -p
+#sudo mysql -u root -p
 
+desc  #showing properties
 
 
 
 
 
 mydbConnection=mysql.connector.connect
-(host="localhost:8080", port="3306",user="root",password="",database="my_school_db")
+#(host="localhost:8080", port="3306",user="root",password="",database="my_school_db")
 
 
 cursor = mydbConnection.cursor()
@@ -17,7 +18,7 @@ for sch in schools:
     print (sch)
 
 
-CREATE DATABASE school
+Create database school
 CREATE TABLE students(id int(5)AUTO_INCREMENT PRIMARY KEY, Code varchar(10), name varchar(250), address varchar(250))
 INSERT into students(Code,name,address) VALUES ('1003','Eastleigh High School','Nairobi')
 
