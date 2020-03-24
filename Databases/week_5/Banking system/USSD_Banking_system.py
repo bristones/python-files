@@ -12,35 +12,34 @@ mydbConnection = mysql.connector.connect(
     host="localhost",
     port="3306",
     user="root",
-    passwd="@5*Star123456",
+    passwd="12345678",
     database="school"
 )
 
 
 print("welcome to your account\n")
 print("select the following options;\n")
-
-#customer options:
-select_1='checkBalance'
-select_2='SendMoney'
-Select_3='Exit'
+print("1-check Balance\n","2-Send Money\n","3-Exit\n")
 
 
 #check balance option
-if select_1:
-    firstName=input("enter first name")
+option = int(input("choose\n1-check Balance\n2-Send Money\n3 -Exit\n")
+              
+if option == 1:
+    customerId=input("enter customerId")
     accNo=int(input("enter account number?"))
     customerDetailsInDb
     accountInDb
     print()
     #sending money option 
-elif select_2:
+elif option ==2:
+    customerId=input("enter your customerId")
     amount=int(input("amount to send"))
     name=input("Name of person")
-    mobileNo=input("Mobile number")
-    print("Confirmed! You've send Ksh {} to {} of {}".formart(amount,name,accNo))
+    mobNo=input("Mobile number")
+    print("Confirmed! You've send Ksh {} to {} of {}".formart(amount,name,mobNo))
 #exit option
-elif Select_3:
+elif option==3:
     print("exit")
 else:
     print("invalid number")

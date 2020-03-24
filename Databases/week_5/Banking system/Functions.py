@@ -7,13 +7,15 @@ def Connection():
     host="localhost",
     port="3306",
     user="root",
-    passwd="@5*Star123456",
+    passwd="12345678",
     database="school"
     )
     return mydbConnection
 
 #customer details function
 def customerDetailsInDb(customer_Details):
+    myDbConnection = Connection()
+     mycursor=myDbConnection.cursor()
     mycursor.execute("SELECT firstName, lastName FROM customers") 
     print(mycursor.execute, "Your account details are;")
     
@@ -21,6 +23,8 @@ def customerDetailsInDb(customer_Details):
 
 #account function
 def accountInDb(account):
+    myDbConnection = Connection()
+    mycursor=myDbConnection.cursor()
     mycursor.execute("SELECT accType, accBal FROM account")
     print(mycursor.execute, "Your account balance is:")
 
