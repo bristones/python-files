@@ -1,0 +1,51 @@
+ <!DOCTYPE html>
+ <html lang="english">
+<head>
+ <title> List of students </title>
+</head>
+<body>
+    <h1>students are as follows;</h1>
+    <table>
+        <thead>
+            <th>
+                Name
+            </th>
+            <th>
+                Registration No
+            </th>
+            <th>
+                Addresss   
+                
+            </th>
+                Age
+            </th>
+            <th>
+               School 
+            </th>
+        </thead>
+        <tbody>
+    {% for student in student_data %}
+    <tr>
+        <td>
+        {{ student.name}}
+        </td>
+        <td>
+            {{ student.registration_number}}
+        </td>
+        <td>
+            {{ student.address}}
+        </td>
+        <td>
+            {{ student.age}}
+        </td> 
+        <td>
+            {{ student.school}}
+        </td> 
+        
+    </tr>
+    <p></p>
+    {% endfor %}
+        </tbody>
+    </table>
+</body>
+ </html>

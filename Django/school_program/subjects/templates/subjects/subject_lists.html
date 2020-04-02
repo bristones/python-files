@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> List of subjects </title>
+</head>
+<body>
+   <h1>subjects lists</h1>
+   <table>
+       <thead>
+           <th>
+               Name
+           </th>
+           <th>
+               Score
+           </th>
+           <th>
+            student
+        </th>
+       </thead>
+       <tbody>
+   {% for subject in subjects %}
+   <tr>
+       <td>
+       {{ subject.subject_name}}
+       </td>
+       <td>
+           {{ subject.score}}
+       </td>
+       <td>
+        {{ subject.student}}
+    </td>
+   </tr>
+   <p></p>
+   {% endfor %}
+       </tbody>
+   </table>
+</body>
+</html>

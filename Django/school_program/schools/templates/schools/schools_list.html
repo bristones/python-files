@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> List of schools </title>
+</head>
+<body>
+   <h1>school lists</h1>
+   <table>
+       <thead>
+           <th>
+               Name
+           </th>
+           <th>
+               Code
+           </th>
+           <th>
+               Addresss    
+           </th>
+           <th>
+                No of students
+           </th>
+
+       </thead>
+       <tbody>
+   {% for school in schools %}
+   <tr>
+       <td>
+       {{ school.name}}
+       </td>
+       <td>
+           {{ school.code}}
+       </td>
+       <td>
+           {{ school.address}}
+       </td>
+       <td>
+           {{ school.no_of_students}}
+       </td> 
+
+   </tr>
+   <p></p>
+   {% endfor %}
+       </tbody>
+   </table>
+</body>
+</html>

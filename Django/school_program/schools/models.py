@@ -7,9 +7,9 @@ class School(models.Model):
     address = models.CharField(max_length=100)
     no_of_students = models.IntegerField()
     
-class Meta:
+    class Meta:
         db_table = 'tbl_school'
         managed = True #flush or sync db
         
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name

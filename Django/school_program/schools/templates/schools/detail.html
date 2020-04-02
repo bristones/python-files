@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> school Details </title>
+
+</head>
+<body>
+    <a href="{% path 'schools' %}">Back to Schools</a>
+    <h1>school details</h1>
+    <tr>
+        <p> NAME </p>
+        <p> CODE </p>
+        <p> ADDRESS </p>
+        <p> No Of Students </p>
+    </tr>
+    <hr>
+    <hr>
+    <table>
+        <thead><h2>Students at {{ school.name }}</h2></thead>
+            <tr>
+            <th>ID</th>
+            <th>Name</th>
+
+            <th>Reg No</th>
+            <th>Address</th>
+            <th>Age</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+            <td> <a href="{% url 'student_detail' student.id %}">{{ student.id }} </a> </td>
+            <td> {{ student.name }} </td>
+            <td> {{ student.registration_number }} </td>
+            <td> {{ student.address }} </td>
+            <td> {{ student.age }} </td>
+            {% endfor %}
+            </tr>
+        </table>    
+    
+</body>
+
+</html>

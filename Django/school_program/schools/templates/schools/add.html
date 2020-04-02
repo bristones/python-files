@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='eng'>
+    <head>
+        <meta charset= "UTF-8" >
+        <title> Add school</title>
+    </head>
+    <body>
+        <h2>Add new school</h2>
+
+        <form action="{% url 'schools:add'%}" method="post" name="frmSchool">
+            {%csrf_token %}
+
+            <label for="code">Code: </label>
+            <input id="code" type="text" name="code" values="">
+
+
+            <label for="name">Name: </label>
+            <input id="name" type="text" name="name" values="">
+
+
+            <label for="address">Address: </label>
+            <input id="address" type="text" name="address" values="">
+
+
+            <label for="nofstud">No of students: </label>
+            <input id="nofstud" type="number" name="no_of_students" values="">
+
+
+            <input type ="submit" value="save">
+
+
+        </form>
+    </body>
+
+</html>
