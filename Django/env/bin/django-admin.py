@@ -1,4 +1,4 @@
-#!/home/brie/python-files/myProgram/env/bin/python3
+#!/home/brie/python-files/Django/env/bin/python3
 from django.core import management
 
 if __name__ == "__main__":

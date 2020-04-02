@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url('account/', include('account.urls')),
+    url('currency/', include('currency.urls')),
+    url('customer/', include('customer.urls')),
+    url('transactions/', include('transactions.urls')),
 ]

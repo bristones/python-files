@@ -6,8 +6,6 @@ class Currency(models.Model):
     CurrCode = models.IntegerField()
     
     
-
-
     class Meta:
         db_table = 'tbl_currency'
         managed = True #flush or sync db

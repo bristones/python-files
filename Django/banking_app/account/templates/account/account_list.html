@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> List of Accounts </title>
+</head>
+<body>
+   <h1> Account lists</h1>
+   <table>
+       <thead>
+           <th>
+            AccNo
+           </th>
+           <th>
+               AccType
+           </th>
+           <th>
+            currency_id
+        </th>
+        <th>
+            customer_id
+        </th>
+       </thead>
+       <tbody>
+   {% for account in accounts %}
+   <tr>
+       <td>
+       {{ account.AccNo}}
+       </td>
+       <td>
+           {{ account.AccType}}
+       </td>
+       <td>
+        {{ account.currency_id}}
+    </td>
+    <td>
+        {{ account.customer_id}}
+    </td>
+   </tr>
+   <p></p>
+   {% endfor %}
+       </tbody>
+   </table>
+</body>
+</html>

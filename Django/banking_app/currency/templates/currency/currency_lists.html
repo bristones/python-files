@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> List of Currencies </title>
+</head>
+<body>
+   <h1>currency lists</h1>
+   <table>
+       <thead>
+           <th>
+            CurrName
+           </th>
+           <th>
+            CurrCode
+           </th>
+       </thead>
+       <tbody>
+   {% for currency in currency %}
+   <tr>
+       <td>
+       {{ currency.CurrName}}
+       </td>
+       <td>
+           {{currency.CurrCode}}
+       </td>
+   </tr>
+   <p></p>
+   {% endfor %}
+       </tbody>
+   </table>
+</body>
+</html>

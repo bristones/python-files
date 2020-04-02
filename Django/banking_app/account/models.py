@@ -10,7 +10,6 @@ class Account(models.Model):
     customer_id=models.ForeignKey(Customer,on_delete=models.CASCADE,default=1)
    
     
-    
     class Meta:
         db_table = 'tbl_account'
         managed = True #flush or sync db

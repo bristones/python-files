@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> List of customers </title>
+</head>
+<body>
+   <h1>customer lists</h1>
+   <table>
+       <thead>
+           <th>
+            name
+           </th>
+           <th>
+               mobile
+           </th>
+           <th>
+            id_number
+        </th>
+        <th>
+            balance
+        </th>
+        <th>
+            age
+        </th>
+       </thead>
+       <tbody>
+   {% for customer in customers %}
+   <tr>
+       <td>
+       {{ customer.name}}
+       </td>
+       <td>
+           {{ customer.mobile}}
+       </td>
+       <td>
+        {{ customer.id_number}}
+    </td>
+    <td>
+        {{ customer.balance}}
+    </td>
+    <td>
+        {{ customer.age}}
+    </td>
+   </tr>
+   <p></p>
+   {% endfor %}
+       </tbody>
+   </table>
+</body>
+</html>
