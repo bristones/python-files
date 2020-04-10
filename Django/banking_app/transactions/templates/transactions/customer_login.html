@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+    <style>
+        .login-box
+		{
+			height: 50%;
+			width: 30%;
+			border: 1px grey;
+			margin-left: 35%;
+			margin-top: 10%;
+			position: relative;
+      		box-shadow: 21px 12px 24px 10px rgba(0, 0, 0, .5);
+      		background: #dadada;
+		}
+		.login-header
+		{
+			text-align: center;
+			font-family: "vardhana",cursive;
+			font-size: 35px;
+			background: linear-gradient(to bottom, #3f5b64 0%, #d26edb 100%);
+			color:rgb(228, 139, 139);
+			position: relative;
+      		box-shadow: 1px 3px 14px  rgba(65, 55, 55, 0.5);
+		}
+		.login-body
+		{
+			padding: 20px;
+			line-height: 2;
+		}
+
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <div class="login-header">Login</div>
+        <div class="login-body">
+            <form action="{% url 'transactions:customerlogin' %}" name="frmstusent" method="POST">
+                {% csrf_token %}
+                <!--Prevents cross site scripting-->
+                <label>Mobile Number</label>
+                <input type="text" id="Mobile" name="mobile" value="">
+                <br/>
+                <label>Pin</label>
+                <input type="text" id="Pin" name="pin" value="">
+                
+                <input type="submit" value="Login" class="form-control btn btn-success " name="">
+                {% for message in messages %}
+                {{message}}
+                {% endfor %}
+            </form>
+        </div>
+</div>
+
+</body>

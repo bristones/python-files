@@ -1,0 +1,46 @@
+<!-- #creating a form to add schools -->
+
+<!DOCTYPE html>
+<html lang='eng'>
+    <head>
+        <meta charset= "UTF-8" >
+        <title> Add Customer</title>     
+    </head>
+    <body>
+        <h2>Add new customer</h2>
+
+        <form action="{% url 'customer:add'%}" method="post" name="frmCustomer">
+            {%csrf_token %}
+
+            <label for="name">Name: </label>
+            <input id="name" type="text" name="name" values="">
+            <br>
+            <br>
+            <label for="mobile">Mobile: </label>
+            <input id="mobile" type="text" name="mobile" values="">
+            <br>
+            <br>
+            <label for="id_number">ID Number: </label>
+            <input id="id_number" type="text" name="id_number" values="">
+            <br>
+            <br>
+            <label for="balance">Balance: </label>
+            <input id="balance" type="number" name="balance" values="">
+            <br>
+            <br>
+            <label for="age">Age: </label>
+            <input id="age" type="text" name="age" values="">
+            <br>
+            <br>
+            <label for="pin">Pin: </label>
+            <input id="pin" type="text" name="pin" values="">
+            <!-- <label for="address">Address: </label>
+            <input id="address" type="number" name="address" values="">
+            <br>
+            <br> -->
+            <input type ="submit" value="save">
+
+        </form>
+    </body>
+
+</html>

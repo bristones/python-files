@@ -8,17 +8,17 @@
    <table>
        <thead>
            <th>
+            Transaction_id
+           </th>
+           <th>
             recipient_name
            </th>
            <th>
-               mobile
+            amount
            </th>
            <th>
-            amount
-        </th>
-        <th>
-            customer
-        </th>
+            Account No.
+           </th>
        </thead>
        <tbody>
    {% for transaction in transactions %}
@@ -33,7 +33,7 @@
         {{ transaction.amount}}
     </td>
     <td>
-        {{transaction.customer}}
+        {{transaction.AccNo}}
     </td>
    </tr>
    <p></p>

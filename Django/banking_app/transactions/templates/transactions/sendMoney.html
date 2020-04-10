@@ -1,0 +1,35 @@
+<!-- #creating a form that sends money to another recepient -->
+
+<!DOCTYPE html>
+<html lang='eng'>
+    <head>
+        <meta charset= "UTF-8" >
+        <title> Send Money</title>     
+    </head>
+    <body>
+
+        <form action="{% url 'transactions:send_index'%}" method="post" name="frmSendMoney">
+            {%csrf_token %}
+
+            <label for="recipient_name">Recipient name: </label>
+            <input id="recipient_name" type="text" name="recipient_name" values="">
+            <br>
+            <br>
+            <label for="mobile">Mobile: </label>
+            <input id="mobile" type="text" name="mobile" values="">
+            <br>
+            <br>
+            <label for="amount">Amount: </label>
+            <input id="amount" type="text" name="amount" values="">
+            <br>
+            <br>
+            <label for="AccNo">Account number: </label>
+            <input id="AccNo" type="number" name="AccNo" values="">
+            <br>
+            <br>
+            <input type ="submit" value="save">
+
+        </form>
+    </body>
+
+</html>

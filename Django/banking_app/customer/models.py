@@ -5,8 +5,10 @@ class Customer(models.Model):
     name = models.CharField(max_length=100)
     mobile = models.CharField(max_length=15)
     id_number = models.CharField(max_length=10,unique=True)
-    balance = models.FloatField()
+    address = models.CharField(max_length=20)
     age = models.IntegerField()
+    pin = models.CharField(max_length=5)
+    #address= models.CharField(max_length=25)
     
     class Meta:
         db_table = 'tbl_customer'

@@ -1,0 +1,49 @@
+<!-- #creating a form to add an account -->
+
+<!DOCTYPE html>
+<html lang='eng'>
+    <head>
+        <meta charset= "UTF-8" >
+        <title> Add an Account</title>     
+    </head>
+    <body>
+        <h2>New Account</h2>
+
+        <form action="{% url 'Accounts:add'%}" method="post" name="frmAccounts">
+            {%csrf_token %}
+
+            <label for=" AccNo">AccNo: </label>
+            <input id=" AccNo" type="text" name=" AccNo" values="">
+            <br>
+            <br>
+            <label for="AccType">AccType: </label>            <label for="AccType">AccType: </label>
+
+            <input id="AccType" type="text" name="AccType" values="">
+            <br>
+            <br>
+            <label for="balance">Balance: </label>
+            <input id="balance" type="number" name="balance" values="">
+            <br>
+            <br>
+            <label for="currency_id">currency id: </label>
+            <input id="currency_id" type="text" name="currency_id" values="">
+            <br>
+            <br>
+            <label for="customer_id">customer id: </label>
+            <input id="customer_id" type="number" name="customer_id" values="">
+            <br>
+            <br>
+            <label for="customer">customer: </label>
+            <select name="school" id="">
+            <option value="">Select a customer</option>
+            {% for school in schools %}
+                <option value="{{ school.id }}">{{ school.name }}</option>
+            {% endfor %}
+            
+            </select>
+            <input type ="submit" value="save">
+
+        </form>
+    </body>
+
+</html>

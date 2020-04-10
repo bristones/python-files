@@ -6,6 +6,7 @@ from customer.models import Customer
 class Account(models.Model):
     AccNo = models.CharField(max_length=20)
     AccType = models.CharField(max_length=10)
+    balance = models.FloatField()
     currency_id=models.ForeignKey(Currency,on_delete=models.CASCADE,default=1)
     customer_id=models.ForeignKey(Customer,on_delete=models.CASCADE,default=1)
    

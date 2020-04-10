@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer information</title>
+</head>
+<body>
+    <ul> <!-- <ul> unorderedlists -->
+        <!-- {% for customer in customer_index %} -->
+        <li><p>name : {{customer.name}}</p></li>
+        <li><p>id_number : {{customer.id_number}}</p></li>
+        <li><p>address : {{customer.address}}</p></li>
+
+        <!-- {% endfor %} -->
+    </ul>
+    <p>Account information</p>
+    <!-- we want these info to be displayed--AccNo, AccType, currency_id,  customer_id -->
+
+        <p>Account No: {{account.AccNo}} </p>
+        <p>Account Type: {{account.AccType}}</p>
+        <p>Currency: {{account.currency_id}}</p>
+        <p>Customer Id: {{account.customer_id</p>
+
+</body>
+</html>

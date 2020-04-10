@@ -7,3 +7,8 @@ def index(request):
     context = {'accounts':accounts}
     return render(request, 'account/account_list.html', context)
 
+def Acc_balance(request):
+    balance = Account.objects.filter()
+    context = {'balance':balance}
+    return render(request, 'account/showBalance.html', context)
+    

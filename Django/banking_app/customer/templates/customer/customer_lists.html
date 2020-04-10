@@ -7,6 +7,9 @@
    <h1>customer lists</h1>
    <table>
        <thead>
+            <th>
+            id
+           </th>
            <th>
             name
            </th>
@@ -15,35 +18,38 @@
            </th>
            <th>
             id_number
-        </th>
-        <th>
-            balance
-        </th>
-        <th>
-            age
-        </th>
+            </th>
+            <th>
+                address
+            </th>
+            <th>
+                age
+            </th>
+
        </thead>
        <tbody>
-   {% for customer in customers %}
-   <tr>
-       <td>
-       {{ customer.name}}
-       </td>
-       <td>
-           {{ customer.mobile}}
-       </td>
-       <td>
-        {{ customer.id_number}}
-    </td>
-    <td>
-        {{ customer.balance}}
-    </td>
-    <td>
-        {{ customer.age}}
-    </td>
-   </tr>
-   <p></p>
-   {% endfor %}
+       {% for customer in customers %}
+        <tr>
+            <td><a href="{% url 'customer:customer_detail' customer.id %}"></a>{{customer.id}}
+            </td>
+            <td>
+            {{ customer.name}}
+            </td>
+            <td>
+                {{ customer.mobile}}
+            </td>
+            <td>
+                {{ customer.id_number}}
+            </td>
+            <td>
+                {{ customer.address}}
+            </td>
+            <td>
+                {{ customer.age}}
+            </td>
+        
+        </tr>
+            {% endfor %}
        </tbody>
    </table>
 </body>
