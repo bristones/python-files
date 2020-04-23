@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='eng'>
+    <head>
+        <meta charset= "UTF-8" >
+        <title> Add student</title>
+    </head>
+    <body>
+        <h2>Add new student</h2>
+
+        <form action="{% url 'students:add'%}" method="post" name="frmSchool">
+            {%csrf_token %}
+
+            <label for="name">name: </label>
+            <input id="name" type="text" name="name" values="">
+            <br>
+            <br>
+            <label for="registration_number">registration_number: </label>
+            <input id="registration_number" type="text" name="registration_number" values="">
+            <br>
+            <br>
+            <label for="address">Address: </label>
+            <input id="address" type="text" name="address" values="">
+            <br>
+            <br>
+            <label for="age">age: </label>
+            <input id="age" type="number" name="age" values="">
+            <br>
+            <br>
+            <label for="school">school: </label>
+           
+            <select name="school" id="">
+
+            <option value="">Select a school</option>
+            {% for school in schools %}
+                <option value="{{ school.id }}">{{ school.name }}</option>
+            {% endfor %}
+            
+            </select>
+            <input type ="submit" value="save">
+               
+    
+        </form>
+    </body>
+
+</html>

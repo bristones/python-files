@@ -8,18 +8,24 @@
    <table>
        <thead>
            <th>
-               Name
-           </th>
-           <th>
-               Score
-           </th>
-           <th>
-            student
-        </th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                 Score
+            </th>
+            <th>
+                student
+            </th>
        </thead>
        <tbody>
    {% for subject in subjects %}
    <tr>
+    <td>
+        <a href="% url 'subject_detail' subject.id %}">{{ subject.id }}</a>
+        </td>
        <td>
        {{ subject.subject_name}}
        </td>
@@ -34,5 +40,6 @@
    {% endfor %}
        </tbody>
    </table>
+   <p><a href="{%url 'index' %}">Home</a></p>
 </body>
 </html>

@@ -1,0 +1,78 @@
+{% extends 'base/container_page.html' %}
+{%block content %} 
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h2 class="h2">WithdrawReport</h2>
+      </div>
+<head>
+    <style>
+        .main {
+            padding: 40px 0;
+        }
+
+        .main input,
+        .main input::-webkit-input-placeholder {
+            font-size: 11px;
+            padding-top: 3px;
+        }
+
+        .main-center {
+            margin-top: 30px;
+            margin: 0 auto;
+            max-width: 1000px;
+            padding: 10px 40px;
+            background: #b1dbeb;
+            color: #FFF;
+            text-shadow: none;
+            -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+            -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+            box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+
+        }
+
+        span.input-group-addon i {
+            color: #6c9aac80;
+            font-size: 17px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="main-center">
+
+                <table class="table">
+                    
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Transaction Code</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Account Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for withdrawal in withdrawals %}
+                        <tr>
+                            <td>{{ withdrawal.time }}</td>
+                            <td>{{ withdrawal.trans_code }}</td>
+                            <td>{{ withdrawal.amount }}</td>
+                            <td>{{ withdrawal.balance }}</td>
+                            <td>{{ withdrawal.AccNo }}</td>
+
+                           
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </div>
+            <!--main-center"-->
+        </div>
+        <!--main-->
+    </div>
+
+
+
+{% endblock %}

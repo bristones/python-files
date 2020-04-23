@@ -1,57 +1,113 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils import timezone
 from account.models import Account
 from account.models import Customer
 from .models import SendMoney
 from .models import Withdrawal
 from .models import Deposit
+# from .models import All_transactions
+from .models import T_type
 
 
 # Create your views here.
-def Send_index(request):
+def Send_index(request, pk):
+    account = Account.objects.get(pk=pk)
+    current_balance = account.balance 
+    
     if request.method =="POST":
-        form =request.POST
-        #print(form)
-        sendmoney= SendMoney()
-        sendmoney.recipient_name = form['recipient_name']
-        sendmoney.mobile = form['mobile']
-        sendmoney.amount = form['amount']
-        sendmoney.AccNo = Account.objects.get(pk=form['AccNo'])
-        sendmoney.save()   #insert in database
-        
-        #give us a new id of the recorded item (use the appname and the viewnametag)
-        # return redirect ('transactions:send_index' )
-    return render(request, 'transactions/sendMoney.html', {})
+        form = request.POST
+        send = SendMoney()
+        send.mobile = float(form['mobile'])
+        send.amount = float(form['amount'])
+        send.AccNo = float(form['AccNo'])
+        if current_balance < withdrawal.amount:
+            messages.info(request,'Request failed! your balance of {} is not suficient to complete this transaction'.format(current_balance))
+            
+        else:
+            print(send.amount,send.AccNo) 
+            new_balance = current_balance - send.amount
+            account.balance = new_balance
+            account.save()
+            send.save()
+            
+            messages.success(request,'Confirmed! Ksh {} was sent to {} your new balance is {}'.format(send.amount, send.AccNo, new_balance))
 
-def Withdrawal_index(request):
+        
+    customer = Customer.objects.get(pk=pk)
+    context ={
+        'customer':customer
+    }
+    
+    return render(request, 'transactions/sendMoney.html', context)
+
+
+        
+def withdrawal_index(request,pk):
+    account = Account.objects.get(pk=pk)
+    current_balance = account.balance 
+    
     if request.method =="POST":
-        form =request.POST
-        #print(form)
-        withdraw = Withdrawal()
-        withdraw.amount = form['amount']
-        withdraw.AccNo = Account.objects.get(pk=form['AccNo'])
-        withdraw.save()   #insert in database
-        
-        #give us a new id of the recorded item
-        # return redirect ('dashboard:dashboard', withdraw)
-    return render(request, 'transactions/withdrawMoney.html', {})
+        form = request.POST
+        withdrawal = Withdrawal()
+        withdrawal.amount = float(form['amount'])
+        if current_balance < withdrawal.amount:
+            messages.info(request,'Transaction failed! You cannot withdraw an amount that is greater than your balance of {}'.format(current_balance))
+            
+        else:
+            print(withdrawal.amount,withdrawal.AccNo) 
+            new_balance = current_balance - withdrawal.amount
+            account.balance = new_balance
+            account.save()
+            withdrawal.save()
+            
+            messages.success(request,'Transaction sucessful. you made awithdrawal of {}. your new balance is {}'.format(withdrawal.amount, new_balance))
 
-def Deposit_index(request):
+        
+    customer = Customer.objects.get(pk=pk)
+    context ={
+        'customer':customer
+    }
+    return render(request, 'transactions/withdraw.html',context)
+
+   
+def Deposit_index(request,pk):
+   
+    account = Account.objects.get(pk=pk)
+    current_balance = account.balance 
+    
     if request.method =="POST":
-        form =request.POST
-        #print(form)
-        deposit= Deposit()
-        deposit.amount = form['amount']
-        deposit.AccNo = Account.objects.get(pk=form['AccNo'])
-        deposit.save()   #insert in database
+        form = request.POST
+        deposit = Deposit()
+        deposit.amount = float(form['amount'])
         
-        #give us a new id of the recorded item
-        # return redirect ('dashboard:dashboard, deposit)
-    return render(request, 'transactions/loadMoney.html', {})
+        new_balance = current_balance + deposit.amount
+        account.balance = new_balance
+        account.save()
+        deposit.save()
+        
+        messages.success(request,'Transaction sucessful. You have made a deposit of {}. your new balance is {}'.format(deposit.amount, new_balance))
+        
+        customer = Customer.objects.get(pk=pk)
+        return redirect('transactions:deposit_index',customer.pk)
+    
+    customer = Customer.objects.get(pk=pk)
+    context ={
+        'customer':customer
+    }
+    return render(request, 'transactions/loadMoney.html',context)
+        
+        
 
-def customerProfile(request):
-        # context = {
-        #        }
-        return render(request, "transactions/customer_profile.html")
+def customerProfile(request,pk):
+    customer = Customer.objects.get(pk=pk)
+    account = Account.objects.get(pk=pk)
+    context = {
+            'customer': customer,
+            'account':account
+    }
+    return render(request, "transactions/customer_profile.html",context)
 
 
 def CustomerLogin(request):
@@ -60,15 +116,63 @@ def CustomerLogin(request):
         form = request.POST
         mobileN = form['mobile']
         pin = form['pin']
+        print(mobileN)
+        print(pin)
         customer_info = Customer.objects.get(mobile=mobileN)
+        print(customer_info)
+        print(customer_info.mobile)
+        print(customer_info.pin)
         if customer_info is not None:
+            print('Customer info is not empty')
             if customer_info.pin == pin:
-                return redirect('transactions:customer_profile')
+                print('Pin Matched redirect')
+                return redirect('transactions:customer_profile',customer_info.pk)
             else:
+                print('Pin NOT Matched ')
                 messages.info(request,'Invalid Phone or Pin')
         else:
+            print('Customer info is none')
             messages.info(request,'Invalid Phone or Pin')
             
     context = {}
-    return render(request,"transactions/customer_profile.html",context)
+    return render(request,"transactions/customer_login.html",context)
 
+def wReport(request, pk): 
+
+    customer = Customer.objects.get(pk=pk)
+    account = Account.objects.get(pk=pk)
+    withdrawals = Withdrawal.objects.filter(pk=pk)
+     
+    context ={
+        'withdrawals':withdrawals,
+        'account':account,
+        'customer':customer,
+    }
+    return render(request, "transactions/withdrawReport.html",context)
+    
+def sReport(request, pk):
+    
+    customer = Customer.objects.get(pk=pk)
+    account = Account.objects.get(pk=pk)
+    debit = SendMoney.objects.filter(pk=pk)
+
+    context ={
+        'debit':SendMoney,
+        'account':account,
+        'customer':customer,
+    }    
+    return render(request, "transactions/sReport.html", context)
+
+
+def dReport(request, pk):
+    customer = Customer.objects.get(pk=pk)
+    account = Account.objects.get(pk=pk)
+    credit = Deposit.objects.filter(pk=pk)
+
+
+    context ={
+        'credit':Deposit,
+        'account':account,
+        'customer':customer,
+    }      
+    return render(request, "transactions/dReport.html", context)

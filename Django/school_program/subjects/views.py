@@ -9,8 +9,24 @@ def index(request):
     context = {'subjects':subjects}
     return render(request, 'subjects/subject_lists.html', context)
 
-def single_student_subject(request,student_id):
-    all_student_subjects = Subject.objects.filter(student=student_id)
-    student_name = Student.objects.filter(pk=student_id)
-    context = {'all_student_subjects':all_student_subjects,'student_name':student_name}
+def subject_index(request,pk):
+    school_subjects = Subject.objects.get(pk=pk)  
+    context = {'school_subjects': school_subjects}
     return render(request,"subjects/subject_details.html",context)
+
+def add(request):
+    if request.method =="POST":
+        form =request.POST
+       # print(form)
+        subject= Subject()
+        subject.subject_name = form['subject_name']
+        subject.score = form['score']
+        subject.student = Student.objects.get(pk=form['student'])   #foreign key
+        subject.save()   #insert in database       
+        #give us a new id of the recorded item
+        return redirect('subject:index') #redirect to the link under urls.py
+
+    students = Student.objects.all()  #gives options of the students
+    context={'students':students}
+       
+    return render(request, 'subjects/add.html', context)

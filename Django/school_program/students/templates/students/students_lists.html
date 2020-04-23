@@ -4,9 +4,12 @@
  <title> List of students </title>
 </head>
 <body>
-    <h1>students are as follows;</h1>
+    <h1>List of all Students  {{school.name}}</h1>
     <table>
         <thead>
+            <th>
+                ID
+            </th>
             <th>
                 Name
             </th>
@@ -14,9 +17,10 @@
                 Registration No
             </th>
             <th>
-                Addresss   
-                
+                Addresss    
             </th>
+
+            <th>
                 Age
             </th>
             <th>
@@ -24,8 +28,11 @@
             </th>
         </thead>
         <tbody>
-    {% for student in student_data %}
+    {% for student in students %}
     <tr>
+        <td>
+            <a href="{% url 'students:student_detail' %}">{{ student.id }}</a> 
+        </td>
         <td>
         {{ student.name}}
         </td>
@@ -47,5 +54,6 @@
     {% endfor %}
         </tbody>
     </table>
+    <p><a href="{%url 'index' %}">Home</a></p>
 </body>
  </html>

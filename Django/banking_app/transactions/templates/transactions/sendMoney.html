@@ -1,35 +1,39 @@
 <!-- #creating a form that sends money to another recepient -->
 
-<!DOCTYPE html>
-<html lang='eng'>
-    <head>
-        <meta charset= "UTF-8" >
-        <title> Send Money</title>     
-    </head>
-    <body>
+{% extends 'base/container_page.html' %}
+{%block content %} 
 
-        <form action="{% url 'transactions:send_index'%}" method="post" name="frmSendMoney">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Send money</h1>
+      </div>
+      {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+
+        <form action="{% url 'transactions:send_index' customer.id %}" method="post" name="frmSendMoney">
             {%csrf_token %}
 
-            <label for="recipient_name">Recipient name: </label>
-            <input id="recipient_name" type="text" name="recipient_name" values="">
-            <br>
-            <br>
             <label for="mobile">Mobile: </label>
             <input id="mobile" type="text" name="mobile" values="">
             <br>
             <br>
             <label for="amount">Amount: </label>
-            <input id="amount" type="text" name="amount" values="">
+            <input id="amount" type="number" name="amount" values="">
             <br>
             <br>
             <label for="AccNo">Account number: </label>
             <input id="AccNo" type="number" name="AccNo" values="">
             <br>
+            <label>Customer Id</label>
+
+            <input name="customer_id" value="{{customer_id}}" type="text" />
             <br>
             <input type ="submit" value="save">
 
         </form>
-    </body>
-
-</html>
+{% endblock %} 

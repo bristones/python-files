@@ -7,40 +7,26 @@
    <h1>school lists</h1>
    <table>
        <thead>
-           <th>
-               Name
-           </th>
-           <th>
-               Code
-           </th>
-           <th>
-               Addresss    
-           </th>
-           <th>
-                No of students
-           </th>
+            <th> ID </th>
+           <th>  Name </th>
+           <th>   Code  </th>
+           <th>  Addresss   </th>
+           <th>  No of students </th>
 
        </thead>
        <tbody>
-   {% for school in schools %}
-   <tr>
-       <td>
-       {{ school.name}}
-       </td>
-       <td>
-           {{ school.code}}
-       </td>
-       <td>
-           {{ school.address}}
-       </td>
-       <td>
-           {{ school.no_of_students}}
-       </td> 
+           {% for school in schools %}
+            <tr>
+                <td><a href="{% url 'schools:school_detail' school.id %}">{{ school.id }}</a></td>
+                <td> {{ school.name}} </td>
+                <td> {{ school.code}}  </td>
+                <td> {{ school.address}}  </td>
+                <td> {{ school.no_of_students}} </td> 
 
-   </tr>
-   <p></p>
-   {% endfor %}
+            </tr>
+           {% endfor %}
        </tbody>
    </table>
+   <p><a href="{%url 'index' %}">Home</a></p>
 </body>
 </html>

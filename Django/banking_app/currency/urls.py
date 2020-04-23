@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = [
-    url('', views.index, name='index'),
+    url('currency/', views.index, name='index'),
 ]
 
 

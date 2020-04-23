@@ -1,44 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title> List of transactions </title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statement</title>
+    <style>
+        .main {
+            padding: 40px 0;
+        }
+
+        .main input,
+        .main input::-webkit-input-placeholder {
+            font-size: 11px;
+            padding-top: 3px;
+        }
+
+        .main-center {
+            margin-top: 30px;
+            margin: 0 auto;
+            padding: 10px 40px;
+            background: #009edf;
+            color: #FFF;
+            text-shadow: none;
+            -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+            -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+            box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+
+        }
+
+        span.input-group-addon i {
+            color: #009edf;
+            font-size: 17px;
+        }
+    </style>
 </head>
+
 <body>
-   <h1>transaction lists</h1>
-   <table>
-       <thead>
-           <th>
-            Transaction_id
-           </th>
-           <th>
-            recipient_name
-           </th>
-           <th>
-            amount
-           </th>
-           <th>
-            Account No.
-           </th>
-       </thead>
-       <tbody>
-   {% for transaction in transactions %}
-   <tr>
-       <td>
-       {{ transaction.recipient_name}}
-       </td>
-       <td>
-           {{ transaction.mobile}}
-       </td>
-       <td>
-        {{ transaction.amount}}
-    </td>
-    <td>
-        {{transaction.AccNo}}
-    </td>
-   </tr>
-   <p></p>
-   {% endfor %}
-       </tbody>
-   </table>
+    <div class="container">
+        
+<div class="main-center">
+    <h1>Your Transactions</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Credit</th>
+            <th scope="col">Debit</th>
+            <th scope="col">Transaction Fees</th>
+            <th scope="col">Outstanding Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in All_transactions %}
+        <tr>
+            <td>{{transaction.date}}</td>
+            <td>{{transaction.cashIn}}</td>
+            <td>{{transaction.cashOut}}</td>
+            <td>{{transaction.transactionFee}}</td>
+            <td>{{transaction.balance}}</td>
+        </tr>
+        {% endfor %}
+
+        
+    </tbody>
+</table>
+<a href="/profile/{{customer_id}}" style="color:#000;">Go Back</a>
+</div>
+
+trans_type= models.CharField(max_length=10)
+    trans_code= models.IntegerField()
+    sourceAcc = models.IntegerField()
+    destAcc = models.IntegerField()
+    amount = models.IntegerField()
+    customer = models.ForeignKey(Account,on_delete=models.CASCADE,default=1)
+    time = models.TimeField() 
+
 </body>
+
 </html>

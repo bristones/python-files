@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People's Bank!</title>
+    <link href="{% static 'site/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'site/custom/css/dashboard.css' %}" rel="stylesheet">
+    
+</head>
+<body>
+    <h2>  PEOPLE'S BANK  </h2>
+    <ul>
+        <p><a href="#"> Welcome, to Your Bank of choice</a></p>
+    </ul>
+
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">PEOPLE'S BANK</a>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="{% url 'transactions:customerlogin' %}">Log out</a>
+      </li>
+    </ul>
+  </nav>
+  <!--Menu-->
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="/profile/{{customer.id}}">
+                <span data-feather="home"></span>
+                Add Account
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/do_deposit/{{customer.id}}">
+                <span data-feather="file"></span>
+                Edit customer details
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/send/{{customer.id}}">
+                <span data-feather="shopping-cart"></span>
+                Edit Customer Account details
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/withdraw/{{customer.id}}">
+                <span data-feather="layers"></span>
+                 Withdraw Money 
+              </a>
+            </li>
+          </ul>
+  
+          <h3 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>More</span>
+            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h3>
+          <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <a class="nav-link" href="/w_report/{{customer.id}}">
+                <span data-feather="file-text"></span>
+                withdrawals summary
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file-text"></span>
+                Money Transfer summary
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file-text"></span>
+                Account balance
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file-text"></span>
+                Savings
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      
+ 
+  
+    {%block content %} 
+    
+    
+    {% endblock %}
+</body>
+</html>

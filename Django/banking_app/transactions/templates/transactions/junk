@@ -1,0 +1,117 @@
+receiver_account = form['receiverAccount']
+        pin = form['password']
+        try:
+            customer = Customer.objects.get(pk=customer_id)
+            sender_accountinDB = Account.objects.get(id=sender_account)
+            sender_balance = sender_accountinDB.accountBalance
+            receiver_accountinDB = Account.objects.get(AccNo=receiver_account) #fetch receiver account info
+            if (sender_balance < float(amount)):
+                messages.info(request,'Transaction Failed,You have insufficient funds',extra_tags="InsufficientFunds")
+                context = {customer_id:customer_id}
+                return render(request,"transactions/sendMoney.html",context)
+            elif (customer.pin != pin):
+                messages.info(request,'You have entered a Wrong Pin,Please Go Bank and Try again',extra_tags="pin_error")
+                context = {'customer_id':customer_id}
+                return render(request,"transactions/sendMoney.html",context)
+            else:
+                service_charges = service_charge(float(amount))
+                sender_name = customer.name
+                confirmedReceiverAccount = receiver_accountinDB.AccNo
+                receiverName = receiver_accountinDB.customer_id
+                #grab receiver amount
+                receiverAMount = receiver_accountinDB.balance
+                #update receiver amount
+                new_receiverAmount = float(receiverAMount) + float(amount)
+                #update receiver account
+                receiver_accountinDB.accountBalance = new_receiverAmount
+                #get the sender account object
+                senderAccountCurrency = sender_accountinDB.currency_id
+                #subtract the sender's balance with new amount
+                newSenderBalance =  sender_balance - float(amount) - service_charge
+                #update the sender's account balance
+                
+                sender_accountinDB.balance = newSenderBalance
+                sender_accountinDB.save()
+                receiver_accountinDB.save()
+                
+                #add transactions
+                senderDebit = str(senderAccountCurrency) + " " + str(float(amount))+" sent to " +str(receiverName)+ " of account " + str(receiver_accountinDB.AccNo)
+                receiverCredit = str(senderAccountCurrency) + " " +str(float(amount))+" received from "+str(sender_name)+ " of account "+ str(sender_accountinDB.AccNo)
+                trasactionSender = Transactions(credit='-',debit=senderCashOut,service_charge=service_charges,balance=newSenderBalance,customer=Customer.objects.get(pk=customer_id))
+                trasactionSender.save()
+                trasactionReceiver = Transactions(credit=receiverCredit,debit='-',transactionFee=0,balance=float(new_receiverAmount),customer=Customer.objects.get(pk=receiver_accountinDB.pk))
+                trasactionReceiver.save()
+                context = {'amount':amount,
+                        'service_charges':service_charge,
+                        'newSenderBalance':newSenderBalance,
+                        'new_receiverAmount':new_receiverAmount,
+                        'confirmedReceiverAccount':confirmedReceiverAccount,
+                        'sender_name':sender_name,
+                        'receiverName':receiverName,
+                        'senderAccountCurrency':senderAccountCurrency,
+                        'customer_id':customer_id
+                        }
+                return render(request,"account/balanceMessage.html",context)
+        
+        except ObjectDoesNotExist as ex:
+            messages.info(request,'Account Does Not Exist,Please go back and fill the details',extra_tags="receiver_Account")
+            context = {'customer_id':customer_id}
+            return render(request,"transactions/sendMoney.html",context)
+        
+    context = {
+        'accounts':Account,
+        'customer_id':customer_id
+        }
+    return render(request,"transactions/loadMoney.html",context)
+        
+        
+        #give us a new id of the recorded item (use the appname and the viewnametag)
+        # return redirect ('transactions:send_index' )
+    return render(request, 'transactions/sendMoney.html', {})
+
+def Withdrawal_index(request):
+    if request.method =="POST":
+        form =request.POST
+        #print(form)
+        withd= Account.objects.get(AccNo=form['AccNo'])
+        withdraw = Withdrawal()
+        withdraw.amount = form['amount']
+        withdraw.AccNo = withd 
+        withd.balance += float(withdraw.amount)
+        service_charges = service_charge(float(amount))
+        password = form['password']
+        #grab customer account object using the account number filled
+        account_obj = Account.objects.get(pk=customer_id)
+        accountAmount = account_obj.balance
+        if (float(amount) > accountAmount):
+            messages.info(request,"Failed, Insufficient Balance ,Please top up ", extra_tags="insuficient_balance")
+            context = {'customer_id':customer_id}
+            return render(request,"transactions/withdrawMoney.html",context)
+        
+        elif (customer.pin != password):
+            messages.info(request,"Wrong Pin, Please go back and try again", extra_tags="wrong_pin")
+            context = {'customer_id':customer_id}
+            return render(request,"transactions/withdrawMoney.html",context)
+        
+        else:
+            customerAccountName = account_obj.customer_id
+            account_currency = account_obj.currency_id
+            new_account_balance = accountAmount - float(amount)
+            account_obj.balance = new_account_balance - service_charge
+            account_obj.save()
+            customerdebit = str(currName) + " " + str(float(amount))+ " withdrawn from your account "
+            trasactionWithdraw = Transactions(credit='-',debit=customerdebit,service_charge=service_charges,balance=new_account_balance,customer=Customer.objects.get(pk=customer_id))
+            trasactionWithdraw.save()
+            context = {'customer_id':customer_id,
+                    'account_currency':account_currency,
+                    'service_charges':service_charge,
+                    'accountAmount':accountAmount,
+                    'customerAccountName':customerAccountName,
+                    'new_account_balance':balance,
+                    'amount':amount
+
+
+
+
+
+    

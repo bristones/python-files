@@ -18,3 +18,6 @@ class Subject(models.Model):
     
     def ShowGrade(self):
         return gradingSystem(self.score)
+    
+    def __str__(self):
+        return '{} {}' .fomart(self.name, self.showgrade())

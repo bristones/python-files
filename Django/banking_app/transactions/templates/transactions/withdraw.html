@@ -1,0 +1,36 @@
+<!-- #creating a form that sends money to another recepient -->
+{% extends 'base/container_page.html' %}
+{%block content %} 
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Withdraw</h1>
+      </div>
+      {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+
+    
+
+        <form action="{% url 'transactions:withdrawal_index' customer.id %}" method="post" name="frmwithdrawMoney">
+            {%csrf_token %}
+
+            <label for="amount">Amount: </label>
+            <input id="amount" type="number" name="amount" values="">
+            <br>
+            <br>
+            <input type ="submit" value="save">
+
+        </form>
+    
+{% endblock %}
+
+
+
+
+
+
